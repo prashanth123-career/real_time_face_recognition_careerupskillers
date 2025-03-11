@@ -3,6 +3,6 @@ torch
 torchvision
 opencv-python-headless
 Pillow
-requests
 numpy
-streamlit-webrtc av
+streamlit-webrtc
+av
