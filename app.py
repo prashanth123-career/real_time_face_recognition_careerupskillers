@@ -1,3 +1,4 @@
+import os  # Add this line
 import streamlit as st
 import torch
 import torchvision.transforms as transforms
@@ -14,8 +15,9 @@ st.write("🚀 Developed by [CareerUpskillers](https://www.careerupskillers.com)
 st.write("📞 Contact: WhatsApp 917975931377")
 
 # ✅ Step 1: Load Face Recognition Model
-MODEL_PATH = "models/face_recognition_model.pth"
+MODEL_PATH = "models/face_recognition_model.pth"  # Ensure this path is correct
 
+# Check if the model file exists
 if not os.path.exists(MODEL_PATH):
     st.error(f"❌ Model file '{MODEL_PATH}' not found!")
     st.stop()
