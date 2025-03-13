@@ -1,4 +1,6 @@
 import os
+import asyncio
+import nest_asyncio
 import streamlit as st
 import torch
 import torchvision.transforms as transforms
@@ -6,6 +8,12 @@ from PIL import Image
 import numpy as np
 import av
 from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
+
+# Patch the event loop
+nest_asyncio.apply()
+
+# Disable file watcher for PyTorch modules
+st.get_option("server.fileWatcherType") == "none"
 
 # ✅ Streamlit Branding
 st.set_page_config(page_title="Live Face Recognition", page_icon="👀")
@@ -15,7 +23,11 @@ st.write("🚀 Developed by [CareerUpskillers](https://www.careerupskillers.com)
 st.write("📞 Contact: WhatsApp 917975931377")
 
 # ✅ Step 1: Load Face Recognition Model
-MODEL_PATH = "models/face_recognition_model.pth"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "models", "face_recognition_model.pth")
+
+# Debug statement
+st.write(f"Model Path: {MODEL_PATH}")
 
 if not os.path.exists(MODEL_PATH):
     st.error(f"❌ Model file '{MODEL_PATH}' not found!")
